@@ -14,7 +14,7 @@ async function PostPollController (req, res) {
     }
 
     try{
-        await db.collection("polls").insertOne(poll);
+        await db.collection('polls').insertOne(poll);
         res.status(201).send([poll]);
     }catch(err){
         console.log(err);
@@ -22,8 +22,8 @@ async function PostPollController (req, res) {
 }
 
 async function GetPollController (req, res) {
-    const polls = await db.collection("polls").find({}).toArray();
-    res.json(polls);
+    const polls = await db.collection('polls').find({}).toArray();
+    res.send(polls);
 }
 
 export { PostPollController, GetPollController };
