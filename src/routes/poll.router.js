@@ -6,4 +6,3 @@ export const PollRouter = Router();
 
 PollRouter.get('/poll', GetPollController);
 PollRouter.post('/poll', PostPollMiddleware, PostPollController);
-
