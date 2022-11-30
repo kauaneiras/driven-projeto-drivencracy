@@ -1,0 +1,25 @@
+{
+  "name": "driven-projeto-drivencracy",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon ./src/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kauaneiras/driven-projeto-drivencracy.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kauaneiras/driven-projeto-drivencracy/issues"
+  },
+  "homepage": "https://github.com/kauaneiras/driven-projeto-drivencracy#readme",
+  "dependencies": {
+    "mongodb": "^4.12.1"
+  }
+}
