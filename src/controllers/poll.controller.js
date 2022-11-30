@@ -10,7 +10,7 @@ async function PostPollController (req, res) {
     const { title, expireAt } = req.body;
     const poll = { title, expireAt };
 
-    if (!expireAt) {
+    if (!expireAt || dayjs(expireAt).isBefore(dayjs()) || expireAt === "") {
         poll.expireAt = dayjs().add(30, "day").format("YYYY-MM-DD HH:mm");
     }
 
