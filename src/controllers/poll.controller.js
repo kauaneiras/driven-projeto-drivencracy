@@ -8,15 +8,15 @@ async function PostPollController (req, res) {
     //         expireAt: "2022-02-28 01:00" 
     // }
     const { title, expireAt } = req.body;
-    
+    const poll = { title, expireAt };
 
     if (!expireAt || dayjs(expireAt).isBefore(dayjs()) || expireAt === "") {
-        expireAt = dayjs().add(30, "day").format("YYYY-MM-DD HH:mm");
+        poll.expireAt = dayjs().add(30, "day").format("YYYY-MM-DD HH:mm");
     }
 
     try{
-        await db.collection("polls").insertOne({ title, expireAt });
-        res.status(201).send([{ title, expireAt }]);
+        await db.collection("polls").insertOne(poll);
+        res.status(201).send([poll]);
     }catch(err){
         console.log(err);
     }
