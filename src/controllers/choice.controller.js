@@ -35,7 +35,12 @@ async function GetChoicesController (req, res){
     const id = req.params.id;
     try{
         const choices = await db.collection("choices").find({pollId: id}).toArray();
+        if (!choices){
+            res.status(404).json({message: "Choices not found"});
+            return;
+        }
         res.status(200).json(choices);
+        return
     }
     catch(err){
         res.status(500).json({message: err.message});
