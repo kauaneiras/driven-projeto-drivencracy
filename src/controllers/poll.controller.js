@@ -24,8 +24,8 @@ async function PostPollController (req, res) {
 
 async function GetPollController (req, res) {
     try{
-        const polls = await db.collection("polls").find({}).toArray();
-        res.json(polls);
+        const polls = await db.collection("polls").find({}).toArray().reverse();
+        res.send(polls);
     }
     catch(err){
         res.status(500).send(err);

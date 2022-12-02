@@ -13,6 +13,7 @@ app.use(express.json());
 
 //App routes
 import { PollRouter } from './routes/poll.router.js';
+import { ChoiceRouter } from './routes/choice.router.js';
 
 
 
@@ -20,6 +21,7 @@ import { PollRouter } from './routes/poll.router.js';
 // --> POST/poll
 // body: {title: "Qual a sua linguagem favorita?", expireAt: "2022-02-28 01:00"}
 app.use(PollRouter);
+app.use(ChoiceRouter);
 
 // --> GET/poll
 // Return all polls : [

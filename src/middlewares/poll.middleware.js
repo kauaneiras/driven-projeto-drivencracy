@@ -1,5 +1,3 @@
-
-
 import joi from 'joi';
 
 function PostPollMiddleware(req, res, next) {
