@@ -5,8 +5,8 @@ async function getResultController(req, res){
     const id = req.params.id;
 
     try{
-        const votesArray = [];
-        const index = 0;
+        let votesArray = [];
+        let index = 0;
         const choice = await db.collection('choices').find({ pollId: id }).toArray();
         const vote = await db.collection('votes').find({ }).toArray();
         const poll = await db.collection('polls').findOne({ _id: ObjectId(id) });
