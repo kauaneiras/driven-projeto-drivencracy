@@ -40,11 +40,32 @@ async function GetChoicesController (req, res){
             return;
         }
         res.status(200).json(choices);
-        return
     }
     catch(err){
         res.status(500).json({message: err.message});
     }
 }
 
-export {PostChoiceController, GetChoicesController};
+async function PostChoiceVoteController (req, res){
+    const id = req.params.id;
+    const vote = {createdAt: dayjs().format('YYYY-MM-DD HH:mm'), choiceId: id};
+    try{
+        const searchChoice = await db.collection("choices").findOne({_id: new ObjectId(id)});
+        if(!searchChoice){
+            res.status(404).json({message: "Choice not found"});
+            return;
+        }
+        const searchPoll = await db.collection("polls").findOne({_id: new ObjectId(searchChoice.pollId)});
+        const expired = searchPoll.expiredAt;
+        if(dayjs(expired).isBefore(dayjs())){
+            res.status(403).json({message: "Poll expired"});
+            return;
+        }
+        await db.collection("votes").insertOne(vote);
+        res.status(201).json({message: "Vote created"});
+    }catch(err){
+        res.status(500).json({message: err.message});
+    }
+}
+
+export {PostChoiceController, GetChoicesController, PostChoiceVoteController};
