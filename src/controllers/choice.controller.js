@@ -24,9 +24,11 @@ async function PostChoiceController (req, res){
         }
         await db.collection("choices").insertOne(choice);
         res.status(201).json({message: "Choice created"});
+        return;
     }
     catch(err){
         res.status(500).json({message: err.message});
+        return;
     }
 }
 
@@ -40,9 +42,11 @@ async function GetChoicesController (req, res){
             return;
         }
         res.status(200).json(choices);
+        return;
     }
     catch(err){
         res.status(500).json({message: err.message});
+        return;
     }
 }
 
@@ -63,8 +67,10 @@ async function PostChoiceVoteController (req, res){
         }
         await db.collection("votes").insertOne(vote);
         res.status(201).json({message: "Vote created"});
+        return;
     }catch(err){
         res.status(500).json({message: err.message});
+        return;
     }
 }
 

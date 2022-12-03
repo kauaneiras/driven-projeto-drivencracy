@@ -14,28 +14,12 @@ app.use(express.json());
 //App routes
 import { PollRouter } from './routes/poll.router.js';
 import { ChoiceRouter } from './routes/choice.router.js';
-
-
+import { ResultRouter } from './routes/result.router.js';
 
 //App use routes
-// --> POST/poll
-// body: {title: "Qual a sua linguagem favorita?", expireAt: "2022-02-28 01:00"}
 app.use(PollRouter);
 app.use(ChoiceRouter);
-
-// --> GET/poll
-// Return all polls : [
-// 	{
-// 		_id: "54759eb3c090d83494e2d222",
-//     title: "Qual a sua linguagem favorita?",
-// 		expireAt: "2022-02-28 01:00" 
-// 	},
-// 	...
-// ]
-
-// --> POST/choice
-// body: { title: "JavaScript", pollId: "54759eb3c090d83494e2d222",}
-
+app.use(ResultRouter);
 
 //Server
 const port = process.env.PORT || 5000;
