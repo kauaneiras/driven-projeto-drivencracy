@@ -9,6 +9,12 @@ async function getResultController(req, res){
         const index = 0;
         const choice = await db.collection('choices').find({ pollId: id }).toArray();
         const vote = await db.collection('votes').find({ }).toArray();
+        const poll = await db.collection('polls').findOne({ _id: ObjectId(id) });
+
+        if (!poll) {
+            res.status(404).send({ message: "Poll not found" });
+            return;
+        }
 
         for (let i = 0; i < choice.length; i++) {
             choice[i].vote = 0;
@@ -23,11 +29,6 @@ async function getResultController(req, res){
             }
         }
         console.log( choice[index].vote );
-
-        const poll = await db.collection('poll').findOne({ _id: ObjectId(id) });
-
-        //
-       
         res.status(200).send({...poll, result: { title: choice[index].title, vote: choice[index].vote }});
 
     }catch(error){
