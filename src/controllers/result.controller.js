@@ -28,11 +28,12 @@ async function getResultController(req, res){
                 index = i;
             }
         }
-        console.log( choice[index].vote );
         res.status(200).send({...poll, result: { title: choice[index].title, vote: choice[index].vote }});
+        return;
 
     }catch(error){
         res.status(500).json({message: error.message});
+        return;
     }
 
 }

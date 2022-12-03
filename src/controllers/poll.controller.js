@@ -17,8 +17,10 @@ async function PostPollController (req, res) {
     try{
         await db.collection("polls").insertOne(poll);
         res.status(201).send([poll]);
+        return;
     }catch(err){
-        console.log(err);
+        res.status(500).send(err);
+        return;
     }
 }
 
@@ -26,9 +28,11 @@ async function GetPollController (req, res) {
     try{
         const polls = await db.collection("polls").find({}).toArray();
         res.send(polls.reverse());
+        return;
     }
     catch(err){
         res.status(500).send(err);
+        return;
     }
 }
 
